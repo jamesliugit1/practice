@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      html,
+      body {
+        overflow: hidden;
+      }
+      .page {
+        width: 100%;
+        height: 100%;
+        background: #f7f7f7;
+        position: absolute;
+        top: 0;
+        left: 0;
+        overflow: scroll;
+      }
+      .content {
+        /* padding:20px;
+	*/
+        /* max-height:340px;
+	*/
+        /* overflow:auto;
+	*/
+        transition: 0.2s;
+      }
+      li {
+        padding: 20px;
+        height: 20px;
+        margin: 10px;
+        background: white;
+      }
+      .refresh-loading {
+        height: 50px;
+        line-height: 50px;
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-top: -50px;
+      }
+      .type-1 .con,
+      .refresh-loading .g-m--c {
+        width: 16px;
+        height: 16px;
+        border-radius: 50%;
+        -webkit-animation-name: locate-loading;
+        -moz-animation-name: locate-loading;
+        animation-name: locate-loading;
+        -webkit-animation-duration: 1.58s;
+        -moz-animation-duration: 1.58s;
+        animation-duration: 1.58s;
+        -webkit-animation-timing-function: linear;
+        -moz-animation-timing-function: linear;
+        animation-timing-function: linear;
+        -webkit-animation-iteration-count: infinite;
+        -moz-animation-iteration-count: infinite;
+        animation-iteration-count: infinite;
+        border-top: 2px solid #f43939;
+        border-left: 2px solid #df5555;
+        margin-right: 10px;
+      }
+      @keyframes locate-loading {
+        0% {
+          opacity: 1;
+          -webkit-transform: rotate(0deg);
+          -moz-transform: rotate(0deg);
+          transform: rotate(0deg);
+        }
+        100% {
+          opacity: 1;
+          -webkit-transform: rotate(360deg);
+          -moz-transform: rotate(360deg);
+          transform: rotate(360deg);
+        }
+      }
+      @-webkit-keyframes locate-loading {
+        0% {
+          opacity: 1;
+          -webkit-transform: rotate(0deg);
+          -moz-transform: rotate(0deg);
+          transform: rotate(0deg);
+        }
+        100% {
+          opacity: 1;
+          -webkit-transform: rotate(360deg);
+          -moz-transform: rotate(360deg);
+          transform: rotate(360deg);
+        }
+      }
+      @-moz-keyframes locate-loading {
+        0% {
+          opacity: 1;
+          -webkit-transform: rotate(0deg);
+          -moz-transform: rotate(0deg);
+          transform: rotate(0deg);
+        }
+        100% {
+          opacity: 1;
+          -webkit-transform: rotate(360deg);
+          -moz-transform: rotate(360deg);
+          transform: rotate(360deg);
+        }
+      }
+      .refresh-text {
+        color: #999;
+        text-align: center;
+        font-size: 12px;
+      }
+      .refresh-down {
+        display: none;
+        margin-right: 10px;
+      }
+      .refresh-down.is-rotate {
+        transform: rotate(180deg);
+      }
+      .finish {
+        color: #999;
+        font-size: 12px;
+        height: 50px;
+        line-height: 50px;
+        text-align: center;
+      }
+      .more-c {
+        font-size: 12px;
+        color: #999;
+      }
+      .more-c .con {
+        margin: 0 5px 0 0;
+      }
+      .more-c .type {
+        height: 50px;
+        line-height: 50px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .type-1:after {
+        content: "加载中...";
+        display: inline-block;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="page">
+      <div class="loadmore">
+        <div class="content">
+          <div class="refresh-loading">
+            <span class="refresh-down">??</span>
+            <div id="circle" class="g-m--c"></div>
+            <p class="refresh-text">下拉可刷新</p>
+          </div>
+          <ul class="scrollview">
+            <li>1</li>
+            <li>2</li>
+            <li>3</li>
+            <li>4</li>
+            <li>5</li>
+            <li>6</li>
+            <li>7</li>
+          </ul>
+          <div class="finish" style="display: none">
+            <span>没有更多数据了</span>
+          </div>
+          <div class="more-c">
+            <div id="loadMore" class="type">
+              <div class="con"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script>
+      // 获取dom
+      window.onload = function () {
+        new vueTouch(moveEle);
+        // pageContent.style.width = document.body.offsetWidth + 'px'
+        // pageContent.style.height = document.body.offsetHeight + 'px'
+      };
+      var loadMoreBox = document.querySelector(".loadmore");
+      var moreC = document.querySelector(".more-c");
+      var pageContent = document.querySelector(".page");
+      var refreshDown = document.querySelector(".refresh-down");
+      var circle = document.querySelector("#circle");
+      //下拉刷新
+      var finished = document.querySelector(".finish");
+      //内容容器，可视区域
+      var moveEle = document.getElementsByClassName("content")[0];
+      //真正的内容
+      var scrollView = document.getElementsByClassName("scrollview")[0];
+      //刷新的loading
+      var refreshEle = document.getElementsByClassName("refresh-loading")[0];
+      //刷新显示的提示文字
+      var refreshTxtEle = document.getElementsByClassName("refresh-text")[0];
+
+      function css(ele, t) {
+        // ele.style.transition = 'all ' + t + 'ms'
+        // ele.style.webkitTransition = 'all ' + t + 'ms'
+        ele.style.transform = `translate3d(0px,${t}px,0px)`;
+      }
+
+      var loadMore = document.getElementById("loadMore");
+      var className = loadMore.getAttribute("class");
+      var loadData = false;
+
+      function vueTouch(el) {
+        this.obj = el;
+        this.touch = false;
+        this.moved = false;
+        this.startY = 0;
+        this.diff = 0;
+        this.moveDiff = 50;
+        this.pagePull = true;
+        this.loadData = false;
+        el.addEventListener(
+          "touchstart",
+          (e) => {
+            e.stopPropagation();
+            this.start(e);
+          },
+          false
+        );
+        el.addEventListener(
+          "touchend",
+          (e) => {
+            e.stopPropagation();
+            this.end(e);
+          },
+          false
+        );
+        el.addEventListener(
+          "touchmove",
+          (e) => {
+            e.stopPropagation();
+            this.move(e);
+          },
+          false
+        );
+        pageContent.addEventListener(
+          "scroll",
+          (e) => {
+            e.stopPropagation();
+            this.scroll(e);
+          },
+          false
+        );
+        // vnode.key = this.randomString()
+        this.scroll();
+      }
+
+      vueTouch.prototype = {
+        start: function (e) {
+          if (pageContent.scrollTop > 0) {
+            //当页面已经有滚动或者不是置顶的时候，不需要进行下拉刷新，是页面正常的滑动
+            this.touch = false;
+            return;
+          }
+          this.touch = true; //触摸开始
+          this.moved = false; //还没有进行下拉刷新的滑动
+          this.startY = e.touches[0].clientY; //记录当前手指在屏幕上的纵向坐标，用于判断页面是上滑还是下滑
+          // 样式修改
+          circle.style.display = "none";
+          moreC.style.display = "block";
+          finished.style.display = "none";
+        },
+        end: function (e) {
+          if (!this.touch || !this.moved) {
+            // refreshEle.style.height = '0px'
+            // css(this.obj, 0)
+            return;
+          }
+          // 添加过渡效果
+          this.obj.style.transition = "transform .2s";
+          // css(this.obj, 50)
+          refreshDown.setAttribute("class", "refresh-down");
+          this.pagePull = false;
+          if (this.diff > this.moveDiff) {
+            refreshDown.style.display = "none";
+            circle.style.display = "block";
+            refreshTxtEle.innerHTML = "刷新中";
+            css(this.obj, this.moveDiff);
+            // refreshEle.style.height = this.moveDiff + 'px'
+            setTimeout(() => {
+              let childNodes = scrollView.children;
+              for (let j = childNodes.length - 1; j >= 0; j--) {
+                scrollView.removeChild(childNodes[j]);
+              }
+              //假设每页有6条数据
+              for (let i = 1; i < 7; i++) {
+                let li = document.createElement("li");
+                let index = i;
+                li.innerHTML = index;
+                scrollView.appendChild(li);
+              }
+              //延迟模拟接口调用
+              css(this.obj, 0);
+              // refreshEle.style.height = '0px'
+              setTimeout(() => {
+                //控制在刷新期间，重复向下拉动，不做任何操作
+                this.pagePull = true;
+                // 判断当前内容是否充满，没有，则加载
+                if (scrollView.offsetHeight <= pageContent.offsetHeight) {
+                  moreC.style.display = "block";
+                  finished.style.display = "none";
+                  this.scroll();
+                }
+              }, 300);
+            }, 1000);
+          } else {
+            this.pagePull = true;
+            css(this.obj, 0);
+            // refreshEle.style.height = '0px'
+          }
+        },
+        move: function (e) {
+          if (!this.touch || !this.pagePull) {
+            return;
+          }
+          //计算的移动位移
+          let touchesDiff = e.touches[0].clientY - this.startY;
+          //说明页面是向上滑的，不做任何操作
+          if (touchesDiff < 0) {
+            this.moved = false;
+            return;
+          }
+          // 为了清除卡顿问题，需要清除过渡效果
+          this.obj.style.transition = "none";
+          //
+          this.moved = true;
+          this.diff = touchesDiff;
+          let distance = 0;
+          //moveDiff至少要等于loading的高度
+          if (this.diff <= this.moveDiff) {
+            //moveDiff至少要等于loading的高度
+            //当滑动小于规定的临界值时
+            distance = this.diff;
+            refreshTxtEle.innerHTML = "下拉可刷新";
+            refreshDown.style.display = "block";
+            // css(this.obj, touchesDiff)
+          } else {
+            //当滑动小于规定的临界值时
+            refreshTxtEle.innerHTML = "释放可刷新";
+            refreshDown.setAttribute("class", "refresh-down is-rotate");
+            //弹性
+            distance = this.moveDiff + 0.3 * (touchesDiff - this.moveDiff);
+          }
+          if (distance > 0) {
+            //滑动的距离
+            css(this.obj, distance);
+            // refreshEle.style.height = distance + 'px'
+          }
+        },
+        scroll: function (e) {
+          const _this = this;
+          requestAnimationFrame(function () {
+            //当数据正在加载时，直接返回
+            if (_this.loadData) {
+              return;
+            }
+            if (scrollView.childElementCount >= 30) {
+              finished.style.display = "block";
+              moreC.style.display = "none";
+              return;
+            }
+            let contentHeight = scrollView.offsetHeight;
+            //滚动的距离，加上可视窗口的高度，因为设置了content的max-height为300px
+            // let scrollTop = pageContent.offsetHeight
+            let scrollTop = pageContent.scrollTop + pageContent.offsetHeight;
+            // let scrollTop = _this.obj.scrollTop + 300
+            if (contentHeight && scrollTop > contentHeight - 30) {
+              //当滚动距离内容底部30px的时候，拉取下一页数据
+              //html5提供的classList
+              loadMore.classList.add("type-1");
+              _this.loadData = true;
+              setTimeout(() => {
+                //延迟模拟接口调用
+                loadMore.classList.remove("type-1");
+                let len = scrollView.childElementCount;
+                for (let i = 1; i < 7; i++) {
+                  let li = document.createElement("li");
+                  let index = len + i;
+                  li.innerHTML = index;
+                  scrollView.appendChild(li);
+                }
+                _this.loadData = false;
+              }, 1000);
+              // var classVal = className.concat('type-1');
+              // loadMore.setAttribute('class',classVal);
+            }
+          });
+        },
+        randomString: function (e) {
+          let len = 10;
+          let $chars = "ABCDEFGHJKMNPQRSTWXYZabcdefhijkmnprstwxyz123456789";
+          let maxPos = $chars.length;
+          let pwd = "";
+          for (let i = 0; i < len; i++) {
+            pwd += $chars.charAt(Math.floor(Math.random() * maxPos));
+          }
+          return pwd;
+        },
+      };
+    </script>
+  </body>
+</html>

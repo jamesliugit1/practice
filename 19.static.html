@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    
+</head>
+<body>
+    <script>
+        class player {
+            constructor(name, age) {
+                this.name = name;
+                this.age = age;
+            }
+            static welcome(){
+                return `welcome! ${this.name}`;
+            }
+            static hello(x){
+                return `Hello! ${x.name}`;
+            }
+
+        };
+
+        let player1 = new player('James', 18);
+        console.log(player1);
+        console.log(player.welcome());
+        console.log(player.hello(player1));
+        
+        
+        
+        let helloJames = document.createTextNode(player.hello(player1));
+        console.log(helloJames);
+        let h1 = document.createElement('h1');
+        console.log(h1);
+        h1.appendChild(helloJames);
+        document.querySelector('body').appendChild(h1);
+    </script>
+</body>
+</html>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        function user(name, age, gender) {
+            this.name = name;
+            this.age = age;
+            this.gender = gender;
+            this.habbits = function(habbit){
+                this.habbit = habbit;
+            }
+        }
+        user.prototype.complete = function(){
+            this.complete = true;
+        }
+        console.log(user)
+        
+        let user1 = new user('James', 18, 'male');
+        console.log(user1);
+        console.log(user1.name);
+        
+        user1.habbits('watching video');
+        console.log(user1.habbit);
+
+        user1.complete();
+        console.log(user1);
+
+        let user2 = new user();
+        user2.complete();
+        console.log(user2);
+
+
+
+
+
+
+
+
+
+        class player {
+            constructor(name){
+                this.name = name;
+            }
+            sayHi(){
+                console.log('hi');
+                console.log(this.name);
+            }
+        };
+
+        let player1 = new player('Jack');
+        console.log(player1);
+        player1.sayHi();
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

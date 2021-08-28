@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        function Book(name, pNum) {
+            this.name = name; // 書名
+            this.pNum = pNum; // 頁數
+            this.comment = null; // 評價
+            this.setComments = function(comment) {
+                this.comment = comment;
+            }
+        }
+
+        var ydkjs_1 = new Book('導讀，型別與文法', 257);
+        var ydkjs_2 = new Book('範疇與閉包 / this 與物件原型', 251);
+
+        ydkjs_1.setComments('好書！');
+        console.log(ydkjs_1);
+        console.log(ydkjs_1.comment)
+        console.log(ydkjs_1.setComments === ydkjs_2.setComments);
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

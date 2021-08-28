@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        table {
+            width: 100%;
+        }
+        table, td {
+            border: 1px solid #00f;
+        }
+        
+        /* td {
+            width: 1000px;
+        } */
+        /* 用這個方法可以維持等寬 */
+
+        /* td:nth-child(1) {
+            width: 1000px;
+        }
+        td:nth-child(2) {
+            width: 500px;
+        }
+        td:nth-child(3) {
+            width: 500px;
+        }
+        td:nth-child(4) {
+            width: 1000px;
+        } */
+        /* 按比例分配 */
+
+        table {
+            table-layout: fixed;
+        }
+    </style>
+</head>
+<body>
+    <table>
+        <tbody>
+            <tr>
+                <td>Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio at sapiente, ipsa perferendis, error temporibus recusandae asperiores suscipit praesentium Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fuga inventore architecto officiis rerum quidem libero officia, repellendus voluptate sapiente</td>
+                <td>Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio at sapiente, ipsa perferendis, error temporibus recusandae asperiores suscipit praesentium </td>
+                <td>Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio at sapiente, ipsa perferendis, error temporibus recusa dolor sit amet consectetur, adipisicing elit. Voluptatum incidunt, provident inventore quae quis reiciendis expedita sint id consequuntur, beatae sequi molestias fugiat </td>
+                <td>Lorem ipsum is, error temporibus recusandae aspe </td>
+            </tr>
+
+        </tbody>
+    </table>
+</body>
+</html>

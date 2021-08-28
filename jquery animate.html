@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .box {
+            width: 100px;
+            height: 100px;
+            background-color: aqua;
+            left: 200px;
+            position: absolute;
+        }
+        .box2 {
+            width: 100px;
+            height: 100px;
+            background-color: aquamarine;
+        }
+        .box3 {
+            width: 100px;
+            height: 100px;
+            background-color:blueviolet;
+        }
+        .box4 {
+            width: 100px;
+            height: 100px;
+            background-color: cornsilk;
+        }
+    </style>
+</head>
+<body>
+    <div class="box"></div>
+    <div class="box2"></div>
+    <div class="box3"></div>
+    <div class="box4">Hello</div>
+    <script src="./js/jquery-3.6.0.js"></script>
+    <script>
+        $('.box').click(function(){
+            $(this).animate({
+                width: '+=150px',
+                left: '200px',
+                backgroundColor: '#f00',//Jquery沒有顏色動畫
+                opacity: '.3'
+            },'fast')
+        })  
+        $(".box2").click(function(){
+            $(this).animate({
+                width:'toggle'
+            });
+        });
+        $('.box3').dblclick(function(){
+            $(this).animate({height:'300px',opacity:'0.4'},"slow");
+            $(this).animate({width:'300px',opacity:'0.8'},"slow");
+            $(this).animate({height:'100px',opacity:'0.4'},"slow");
+            $(this).animate({width:'100px',opacity:'0.8'},"slow");
+        });
+        $('.box4').click(function(){
+            $(this).animate({
+                width: "+=100px",
+                height: "+=100px",
+            });
+            $(this).animate({
+                fontSize: '3rem'
+            })
+        });
+    </script>
+</body>
+</html>

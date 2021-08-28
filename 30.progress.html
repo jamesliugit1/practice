@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+        .step {
+            width: 500px;
+            margin: 100px auto;
+            /* outline: 1px solid #f00; */
+            display: flex;
+            position: relative;
+            justify-content: space-between;
+        }
+        .step li {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: #fa0;
+            z-index: 2;            
+            line-height: 40px;
+            text-align: center;
+            color: #fff;
+            transition: .25s; 
+            cursor: default;  
+        }
+        .step li.active {
+            background-color: #fa0;
+            transform: scale(1.3);
+        }
+        .step li.active ~ li {
+            background-color: #ccc;          
+        }
+        .step .line {
+            content: "";
+            height: 6px;
+            width: 98%;
+            position: absolute;
+            z-index: 0;
+            background-color: #ccc;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            margin: auto;  
+            border-radius: 0;
+            transition: .5s;
+        }
+        .step li:nth-child(1).active ~ .line {
+            background-image: linear-gradient(to right,#ff0, #fa0 0%, #ccc 0%);
+        }
+        .step li:nth-child(2).active ~ .line {
+            background-image: linear-gradient(to right,#ff0, #fa0 25%, #ccc 25%);
+        }
+        .step li:nth-child(3).active ~ .line {
+            background-image: linear-gradient(to right,#ff0, #fa0 50%, #ccc 50%);
+        }
+        .step li:nth-child(4).active ~ .line {
+            background-image: linear-gradient(to right,#ff0, #fa0 75%, #ccc 75%);
+        }
+        .step li:nth-child(5).active ~ .line {
+            background-image: linear-gradient(to right,#ff0, #fa0 100%, #ccc 100%);
+        }
+    </style>
+</head>
+<body>
+    <ul class="step">
+        <li>1</li>
+        <li>2</li>
+        <li class="active">3</li>
+        <li>4</li>
+        <li>5</li>
+        <li class="line"></li>
+    </ul>
+    <script src="./js/jquery-3.6.0.js"></script>
+    <script>
+        $('li:not(:empty)').click(function(){
+            $(this).addClass('active').siblings().removeClass('active');
+        })
+    </script>
+</body>
+</html>

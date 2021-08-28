@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .container {
+            width: 600px;
+            background-color: #faf;
+            margin: 0 auto;
+            text-align: center;
+        }
+        h3 {
+            background-color: darkseagreen;
+            margin: 0;
+        }
+        p {
+            border-top: 1px solid purple;
+            margin: 0;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <button id="btn">STOP</button>
+        <h3>slide</h3>
+        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Excepturi vel repudiandae explicabo veritatis provident exercitationem totam ipsa tenetur a deserunt hic ex amet, qui fugit reiciendis aliquam aut asperiores est?Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit modi, perspiciatis consequatur, quisquam cupiditate at quidem voluptates, deserunt accusamus facere eaque impedit iusto temporibus iure? Voluptas impedit architecto aperiam culpa.</p>
+    </div>
+    <script src="./js/jquery-3.6.0.js"></script>
+    <script>
+        $('h3').click(function(){
+            $('p').slideToggle(5000);
+        })
+        $('#btn').click(function(){
+            $('p').stop()
+        })    
+    </script>
+</body>
+</html>

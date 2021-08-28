@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *,
+        *::after,
+        *::before {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            height: 500vh;
+        }
+        .tabs {
+            background-color: dimgray;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: fit-content;
+            line-height: 40px;
+            padding: 4px 0;
+            display: flex;
+            text-align: center;
+        }
+        input[type=radio] {
+            display: none;
+        }
+        .tab {
+            display: block;
+            width: 120px;
+            color: #fff;
+            transition: .1s;
+        }
+        .tab:not(:nth-child(3)) {
+            border-right: 2px solid gray;
+        }
+        .glider {
+            width: 120px;
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            border-bottom: 5px solid tomato;
+            transition: .25s;
+        }
+        input[id=radio1]:checked ~ .glider {
+            transform: translateX(0);
+        }
+        input[id=radio2]:checked ~ .glider {
+            transform: translateX(100%);
+        }
+        input[id=radio3]:checked ~ .glider {
+            transform: translateX(200%);
+        }
+        h1 {
+            margin-top: 700px;
+        }
+    </style>
+</head>
+<body>
+    <div class="tabs">
+        <input type="radio" id="radio1" name="tabs" checked>
+        <label for="radio1" class="tab">Tab1</label>
+        <input type="radio" id="radio2" name="tabs">
+        <label for="radio2" class="tab">Tab2</label>
+        <input type="radio" id="radio3" name="tabs">
+        <label for="radio3" class="tab">Tab3</label>
+        <div class="glider"></div>
+    </div>
+    <h1 id="tab1">Tab1</h1>
+    <h1 id="tab2">Tab2</h1>
+    <h1 id="tab3">Tab3</h1>
+    <script src="./js/jquery-3.6.0.js"></script>
+    <script>
+           let label = document.querySelectorAll('label');
+           let tab1 = $('#tab1').offset().top;
+           let tab2 = $('#tab2').offset().top;
+           let tab3 = $('#tab3').offset().top;
+           console.log(tab1);
+           label[0].addEventListener('click', function(){                
+              window.scrollTo({top: tab1 - 48, behavior: "smooth"});
+           });
+           label[1].addEventListener('click', function(){                
+              window.scrollTo({top: tab2 -48, behavior: "smooth"});
+           });
+           label[2].addEventListener('click', function(){                
+              window.scrollTo({top: tab3 -48, behavior: "smooth"});
+           });
+    </script>
+</body>
+</html>

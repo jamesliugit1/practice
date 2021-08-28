@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .stars li {
+            display: inline-block;
+            color: #adadad;
+            font-size: 40px;
+            cursor: pointer;
+        }
+        span::before {
+            content: "您給出了";
+        }
+        span::after {
+            content: "顆星";
+        }
+    </style>
+</head>
+<body>
+    <ul class="stars">
+        <li>★</li>
+        <li>★</li>
+        <li>★</li>
+        <li>★</li>
+        <li>★</li>
+    </ul>
+    <span> </span>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+        
+        let isClicked = false;
+
+        // hover星星
+        $('.stars li').hover(
+            function(){
+                if (!isClicked) {
+                    let index = $(this).index();
+                    // 依序將星星變成黃色
+                    for (let i = 0; i<= index; i++){
+                        $('.stars li').eq(i).css('color', '#f0ad4e');
+                    }
+                }
+            },
+            function(){
+                // 滑鼠移開時變回灰色
+                if (!isClicked) {
+                    $('.stars li').css('color', '#adadad');
+                }
+            }
+        );
+
+        // 點擊星星
+        $('.stars li').click(function(){
+            isClicked = true;
+            $('.stars li').css('color', '#adadad');
+            let index = $(this).index();
+            let value = ($(this).index()) + 1;
+            // 依序將星星變成黃色
+                for (let i = 0; i<= index; i++){
+                    $('.stars li').eq(i).css('color', '#f0ad4e');
+                }
+            // 顯示給予星星數
+            $('span').text(value);
+        })
+    </script>
+</body>
+</html>
