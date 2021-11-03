@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .table {
+            display: table;
+            border-collapse: collapse;
+            /* 表格的邊框是分開的還是合併的 
+            border-collapse: separate
+            */
+        }
+        .tr1 {
+            display: table-row;
+        }
+        .cell1 {
+            display: table-cell;
+            background-color: #faf;
+            height: 360px;
+            width: 200px;
+            vertical-align: middle;
+            border: 2px solid #fff;
+        }
+        .cell2 {
+            display: table-cell;
+            background-color: #afa;
+            width: 200px;
+            height: 200px;
+            vertical-align: middle;
+            border: 2px solid #fff;
+        }
+        .cell3 {
+            display: table-cell;
+            background-color: #ffa;
+            border: 2px solid #fff;
+        }
+        .tr2 {
+            display: table-row;
+        }
+        .cell4 {
+            display: table-cell;
+            width: 500px;
+            background-color: #aaf;
+        }
+        .cell5 {
+            display: table-cell;
+            background-color: #aaa;
+            height: 10px;
+        }
+
+        .test {
+            display: table-cell;
+            background-color: #cac;
+            vertical-align: middle;
+            height: 300px;
+        }
+
+        /* 一些實驗記錄:
+            
+        1.行列上下左右的寬高有衝突時，會呈現最大值，也就是說，小值仍然是有效的，只是統一成最大值
+        2.格子的大小不會小於內容物的大小，但是仍然是有效的
+        3.display:table-cell 加 vertical-align: middle為實現垂直置中的一種方法
+        */
+    </style>
+</head>
+<body>
+    <div class="table">
+        <div class="tr1">
+            <div class="cell1">
+                <p>cell1</p>
+                <p>cell1</p>
+                <p>cell1</p>
+            </div>
+            <div class="cell2">
+                <p>cell2</p>
+            </div>
+            <div class="cell3">
+                <p>cell3</p>
+                <p>cell3</p>
+                <p>cell3</p>
+            </div>
+        </div>
+        <div class="tr2">
+            <div class="cell4">
+                <p>cell4</p>
+            </div>
+            <div class="cell5">
+                <p>cell5</p>
+                <p>cell5</p>
+                <p>cell5</p>
+                <p>cell5</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="test">
+        <p>我會垂直置中</p>
+    </div>
+</body>
+</html>

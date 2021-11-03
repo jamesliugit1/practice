@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@4.0.7/dist/fancybox.css">
+    <style>
+        #dialog-content {
+            display: none;
+            max-width: 640px;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- 光箱 -->
+    <div id="dialog-content">
+        <h1>Hello World</h1>
+        <input type="text">
+        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Harum suscipit sit consectetur repudiandae animi ipsam
+        deleniti eos numquam similique asperiores quaerat quod illo veritatis, vel repellat officiis, voluptate
+        reprehenderit beatae.
+    </div>
+
+    <!-- 綁定屬性叫出光箱 -->
+    <button data-fancybox="dialog" data-src="#dialog-content">Launch Dialog</button>
+
+    <!-- 影片 -->
+    <a href="" data-fancybox="video-gallery" data-src="https://www.youtube.com/embed/wJ6FMjZkbMI">
+        <img src="./images/n13.jpg" alt="" width="200px" height="150px">
+    </a>
+    <!-- mp3 -->
+    <a href="./images/蓑部雄崇 - 游星テーマ.mp3" data-fancybox="" data-type="html5video" data-thumb="./images/n3-1.jpg">
+        mp3
+    </a>
+    <button id="video1">video programming</button>
+
+    <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@4.0.7/dist/fancybox.umd.js"></script>
+
+    <script>
+        // 腳本叫出光箱
+        Fancybox.show([{
+            src: '#dialog-content',
+            type: "inline"
+            // type: "clone"
+        }]);
+
+        // 腳本叫出影片
+        document.getElementById('video1').addEventListener('click', function () {
+            Fancybox.show([
+                {
+                    src: 'https://www.youtube.com/embed/aKE2zw0G4vw',
+                    type: 'video'
+                },
+            ],
+            {
+                Html: {
+                    video: {
+                        autoplay: false,
+                    },
+                },
+            })
+        })
+    </script>
+</body>
+
+</html>

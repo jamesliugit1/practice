@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <p id="idP" class="classP" data-test="123" data-value="456">test</p>
+    <a id="idA" data-W="www" action="xx">test2</a>
+
+    <script src="./js/jquery-3.6.0.min.js"></script>
+    <script>
+        let p = $('#idP');
+        console.log(p.prop('id'));
+        console.log(p.prop('className'));
+        console.log(p.prop('data-test'));
+
+        // HTML元素本身就帶有的固有屬性，使用prop()。
+        // 對於HTML元素自定義的屬性，使用attr()。
+
+        let a = $('#idA');
+        a.prop('href', 'https://www.windy.com/?24.700,116.543,5');
+        console.log(a.prop('href'));
+        console.log(a.prop('action'));
+        console.log(a.attr('action'));
+    </script>
+</body>
+</html>

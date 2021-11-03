@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@4.0.7/dist/fancybox.css">
+    <style>
+        .container {
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            flex-wrap: wrap;
+            place-content: center;
+        }
+
+        .container img {
+            width: 320px;
+            height: 180px;
+            object-fit: cover;
+            margin: 20px 16px;
+        }
+
+        /* 縮圖的樣式 */
+        .fancybox__container {
+            --fancybox-thumbs-border-radius: 50%;
+            --fancybox-thumbs-ratio: 1;
+            --fancybox-thumbs-width: 50px;
+            --fancybox-thumbs-height: 50px;
+            --fancybox-accent-color: #ff0;
+        }
+    </style>
+</head>
+
+<body>
+
+    <button>fancybox</button>
+
+    <a href="javascript:;" data-fancybox-trigger="gallery1">trigger</a>
+
+    <div id="gallery" class="container">
+        <a href="./images/n2.jpg" data-caption="淡水">
+            <img src="./images/n2.jpg" />
+        </a>
+        <a href="./images/n24.jpeg">
+            <img src="./images/n24.jpeg" />
+        </a>
+        <a href="./images/n19.jpg">
+            <img src="./images/n19.jpg" alt="">
+        </a>
+        <a href="./images/n12.jpg">
+            <img src="./images/n12.jpg" alt="">
+        </a>
+        <a href="./images/n13.jpg">
+            <img src="./images/n13.jpg" alt="">
+        </a>
+        <a href="./images/n4-1.jpg">
+            <img src="./images/n4-1.jpg" alt="">
+        </a>
+    </div>
+
+    <!-- 將屬性寫在html裡 -->
+    <a data-fancybox="" data-src="./images/Photo.jpg"
+        data-download-src="https://fancyapps.com/docs/ui/fancybox/plugins/toolbar">
+        <img src="./images/Photo.jpg" />
+    </a>
+
+    <a data-fancybox="responsive" data-src="https://lipsum.app/id/5/800x600"
+        data-srcset="https://lipsum.app/id/5/480x360 480w, https://lipsum.app/id/5/800x600 800w"
+        data-sizes="(max-width: 600px) 480px, 800px">
+        <img src="https://lipsum.app/id/5/200x150" width="200" height="150" />
+    </a>
+
+    <!-- 一張縮圖展示多張圖片 -->
+    <div class="container">
+        <a href="./images/n22.jpg" data-fancybox="gallery1" data-caption="貓空">
+            <img src="./images/n22.jpg" alt="">
+        </a>
+        <div style="display: none">
+            <a href="./images/n23.jpg" data-fancybox="gallery1">
+                <img src="./images/n23.jpg" alt="">
+            </a>
+            <a href="./images/n3-1.jpg" data-fancybox="gallery1">
+                <img src="./images/n3-1.jpg" alt="">
+            </a>
+            <a href="./images/n7.jpg" data-fancybox="gallery1">
+                <img src="./images/n7.jpg" alt="">
+            </a>
+            <a href="./images/n24.jpeg" data-fancybox="gallery1">
+                <img src="./images/n24.jpeg" alt="">
+            </a>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@4.0.7/dist/fancybox.umd.js"></script>
+
+    <script>
+        // 叫出Fancybox的幾種方法
+        const fancybox = Fancybox.show([
+            {
+                src: "./images/n7.jpg",
+                type: "image",
+            },
+            {
+                src: "./images/n22.jpg",
+                type: "image",
+            },
+        ]);
+        // 第二種方法
+        // const fancybox = new Fancybox([
+        //     {
+        //         src: "./images/n7.jpg",
+        //         type: "image",
+        //     },
+        //     {
+        //         src: "./images/n22.jpg",
+        //         type: "image",
+        //     },
+        // ]);
+    </script>
+
+    <script>
+        // 使用bind綁定
+        Fancybox.bind("#gallery a", {
+            groupAll: true, // Group all items
+            on: {
+                ready: (fancybox) => {
+                    console.log(`fancybox #${fancybox.id} is ready!`);
+                }
+            }
+        });
+        Fancybox.bind("[data-fancybox]", {
+            Thumbs: {
+                autoStart: true,
+                // 縮圖自動顯示:預設true
+            },
+            Toolbar: {
+                // 工具列選項
+                display: [
+                    { id: "prev", position: "center" },
+                    { id: "counter", position: "center" },
+                    { id: "next", position: "center" },
+                    "zoom",
+                    "slideshow",
+                    "fullscreen",
+                    "download",
+                    "thumbs",
+                    "close",
+                ],
+            },
+        });
+    </script>
+
+    <script>
+        // 陣列腳本寫法
+        var gallery = [
+            {
+                src: "./images/n19.jpg",
+                thumb: "./images/n19.jpg",
+                caption: "First image",
+            },
+            {
+                src: "./images/n13.jpg",
+                thumb: "./images/n13.jpg",
+                caption: "Second image",
+            },
+            {
+                src: "./images/n12.jpg",
+                thumb: "./images/n12.jpg",
+                caption: "Third image",
+            },
+        ];
+
+        document.querySelector('button').addEventListener('click', function () {
+            Fancybox.show(gallery, {
+                Image: {
+
+                }
+            });
+        });
+    </script>
+
+</body>
+
+</html>
