@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .speech {
+            width: 250px;
+            height: 90px;
+            border: 1px solid #333;
+            border-radius: 8px;
+            position: relative;
+            display: grid;
+            place-content: center;
+        }
+        .arrow-border {
+            width: 0;
+            height: 0;
+            border-style: solid;
+            border-width: 15px;
+            border-color: transparent transparent transparent #333;
+            position: absolute;
+            bottom: 20%;
+            right: -30px;
+        }
+        .arrow {
+            width: 0;
+            height: 0;
+            border-style: solid;
+            border-width: 15px;
+            border-color: transparent transparent transparent #fff;
+            position: absolute;
+            bottom: 20%;
+            right: -29px;
+        }
+    </style>
+</head>
+<body>
+    <div class="speech">
+        <div class="arrow-border"></div>
+        <div class="arrow"></div>
+        對話框
+    </div>
+</body>
+</html>

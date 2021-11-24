@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        caption {
+            font-size: 24px;
+            margin-bottom: 16px;
+        }
+        table {
+            border-radius: 6px;
+            border-collapse: collapse;
+            table-layout: fixed;
+            width: 100%;
+        }
+        th {
+            /* width: 200px; */
+            height: 32px;
+            background: #99f;
+            vertical-align: center;
+            color: #fff;
+        }
+        td {
+            /* width: 200px; */
+            /* height: 32px; */
+            background: #eef;
+            vertical-align: center;
+            text-align: center;
+            border: 3px solid #fff;
+            color: #33d;
+        }
+    </style>
+</head>
+<body>
+    <table>
+        <caption>桃園市景點資料(中)</caption>
+        <thead>
+            <tr>
+                <th>名稱</th>
+                <th>簡述</th>
+                <th>地址</th>
+                <th>郵遞區號</th>
+                <th>開放時間</th>
+                <th>費用資訊</th>
+                <th>電話</th>
+                <th>更新時間</th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+        // $.ajax({
+        //     type: "GET",
+        //     url: "./桃園市景點資料(中).json",
+        //     dataType: "json",
+        //     success: function(){
+        //         console.log('success');
+        //     },
+        //     error: function(){
+        //         console.log('error');
+        //     }
+        // }).done(function(data){
+        //     let infos = data.infos;
+        //     $.each(infos, function(index, item){
+        //         $('tbody').append(
+        //             `<tr>
+        //                 <td>${item.Name}</td>
+        //                 <td>${item.Toldescribe}</td>
+        //                 <td>${item.Add}</td>
+        //                 <td>${item.Zipcode}</td>
+        //                 <td>${item.Opentime}</td>
+        //                 <td>${item.Ticketinfo}</td>
+        //                 <td>${item.Tel}</td>
+        //                 <td>${item.Changetime}</td>
+        //             </tr>`
+        //         )
+        //     })
+        // });
+        
+        $.get('./桃園市景點資料(中).json', function(data){
+            let infos = data.infos;
+            $.each(infos, function(index, item){
+                $('tbody').append(
+                    `<tr>
+                        <td>${item.Name}</td>
+                        <td>${item.Toldescribe}</td>
+                        <td>${item.Add}</td>
+                        <td>${item.Zipcode}</td>
+                        <td>${item.Opentime}</td>
+                        <td>${item.Ticketinfo}</td>
+                        <td>${item.Tel}</td>
+                        <td>${item.Changetime}</td>
+                    </tr>`
+                )
+            })
+        })
+    </script>
+</body>
+</html>

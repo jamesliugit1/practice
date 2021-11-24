@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .box {
+            width: 240px;
+            border: 1px solid #000;
+            margin: 16px;
+        }
+    </style>
+</head>
+<body>
+    <div class="box" id="box1"></div>
+    <div class="box" id="box2"></div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+        $('#box1').load('./h.html');
+        
+        $('#box2').load('./h.html #hello', function(responseText, textStatus, jqXHR){
+            console.log(responseText);  //請求的文件內容
+            console.log(textStatus);  //請求狀態 (success, error)
+            console.log(jqXHR); //XMLHttpRequest Object
+        })
+    </script>
+</body>
+</html>
